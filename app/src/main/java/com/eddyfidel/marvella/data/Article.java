@@ -1,6 +1,7 @@
 package com.eddyfidel.marvella.data;
 
-import com.eddyfidel.marvella.data.Character;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class Article {
 
+    @SerializedName("items")
+    @Expose
     private List<Character> items;
 
     public List<Character> getItems() {

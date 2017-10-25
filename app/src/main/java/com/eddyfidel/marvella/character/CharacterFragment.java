@@ -24,8 +24,6 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
 
     private CharacterAdapter mCharacterAdapter;
 
-    private LinearLayout mCharacterView;
-
     public CharacterFragment() {
         // Required empty public constructor
     }
@@ -62,8 +60,6 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
         ListView listView = (ListView) root.findViewById(R.id.characterListView);
 
         listView.setAdapter(mCharacterAdapter);
-
-        mCharacterView = (LinearLayout) root.findViewById(R.id.characterLinearLayout);
 
         ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refreshLayout);
 
@@ -105,8 +101,6 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     @Override
     public void showCharacters(List<Character> characters) {
         mCharacterAdapter.replaceData(characters);
-
-        mCharacterView.setVisibility(View.VISIBLE);
     }
 
     private static class CharacterAdapter extends BaseAdapter {
