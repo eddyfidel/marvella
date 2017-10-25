@@ -1,11 +1,15 @@
 package com.eddyfidel.marvella.character;
 
 import com.eddyfidel.marvella.character.CharacterContract.Presenter;
+import com.eddyfidel.marvella.data.Article;
 import com.eddyfidel.marvella.data.Character;
 import com.eddyfidel.marvella.data.source.CharacterRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by eddyfidel on 10/24/17.
@@ -34,20 +38,27 @@ public class CharacterPresenter implements Presenter {
         loadCharacters(true);
     }
 
-    private void loadCharacters(boolean showLoadingUI) {
+    private void loadCharacters(final boolean showLoadingUI) {
         if (showLoadingUI) {
             mCharacterView.setLoadingIndicator(true);
         }
 
-        List<Character> charactersToShow = new ArrayList<Character>();
+        mCharacterRepository.getMarvelWikiaService().getArticle(1, "Personajes", 25).enqueue(new Callback<Article>() {
 
-        mCharacterRepository.getCharacters(25);
+            @Override
+            public void onResponse(Call<Article> call, Response<Article> response) {
+                if (showLoadingUI) {
+                    mCharacterView.setLoadingIndicator(false);
+                }
 
-        if (showLoadingUI) {
-            mCharacterView.setLoadingIndicator(false);
-        }
+                processCharacters(response.body().getItems());
+            }
 
-        processCharacters(charactersToShow);
+            @Override
+            public void onFailure(Call<Article> call, Throwable t) {
+
+            }
+        });
     }
 
     private void processCharacters(List<Character> characters) {

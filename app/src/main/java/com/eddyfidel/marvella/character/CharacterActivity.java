@@ -2,7 +2,6 @@ package com.eddyfidel.marvella.character;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.eddyfidel.marvella.R;
 import com.eddyfidel.marvella.data.source.CharacterRepository;
@@ -18,10 +17,6 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.character_activity);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
 
         CharacterFragment characterFragment = (CharacterFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
