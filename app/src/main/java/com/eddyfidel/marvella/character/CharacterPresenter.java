@@ -1,6 +1,5 @@
 package com.eddyfidel.marvella.character;
 
-import com.eddyfidel.marvella.character.CharacterContract.Presenter;
 import com.eddyfidel.marvella.data.Article;
 import com.eddyfidel.marvella.data.Character;
 import com.eddyfidel.marvella.data.source.CharacterRepository;
@@ -15,15 +14,15 @@ import retrofit2.Response;
  * Created by eddyfidel on 10/24/17.
  */
 
-public class CharacterPresenter implements Presenter {
+public class CharacterPresenter implements CharacterContract.Presenter {
 
     private final CharacterRepository mCharacterRepository;
 
     private final CharacterContract.View mCharacterView;
 
-    public CharacterPresenter(CharacterRepository mCharacterRepository, CharacterContract.View mCharacterView) {
-        this.mCharacterRepository = mCharacterRepository;
-        this.mCharacterView = mCharacterView;
+    public CharacterPresenter(CharacterRepository repository, CharacterContract.View view) {
+        mCharacterRepository = repository;
+        mCharacterView = view;
 
         mCharacterView.setPresenter(this);
     }
@@ -38,8 +37,8 @@ public class CharacterPresenter implements Presenter {
         loadCharacters(true);
     }
 
-    private void loadCharacters(final boolean showLoadingUI) {
-        if (showLoadingUI) {
+    private void loadCharacters(final boolean showLoadingUi) {
+        if (showLoadingUi) {
             mCharacterView.setLoadingIndicator(true);
         }
 
@@ -47,7 +46,7 @@ public class CharacterPresenter implements Presenter {
 
             @Override
             public void onResponse(Call<Article> call, Response<Article> response) {
-                if (showLoadingUI) {
+                if (showLoadingUi) {
                     mCharacterView.setLoadingIndicator(false);
                 }
 
