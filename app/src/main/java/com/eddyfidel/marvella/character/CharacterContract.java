@@ -1,7 +1,7 @@
 package com.eddyfidel.marvella.character;
 
-import com.eddyfidel.marvella.BasePresenter;
-import com.eddyfidel.marvella.BaseView;
+import com.eddyfidel.marvella.common.BasePresenter;
+import com.eddyfidel.marvella.common.BaseView;
 import com.eddyfidel.marvella.data.Character;
 
 import java.util.List;

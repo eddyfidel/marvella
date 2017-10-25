@@ -2,13 +2,11 @@ package com.eddyfidel.marvella.character;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class CharacterFragment extends Fragment implements CharacterContract.View {
 
-    private CharacterContract.Presenter mPresenter;
+    private CharacterContract.Presenter mCharacterPresenter;
 
     private CharacterAdapter mCharacterAdapter;
 
@@ -42,31 +40,19 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        mPresenter.start();
-    }
-
-    @Override
     public void setPresenter(CharacterContract.Presenter presenter) {
-        mPresenter = presenter;
+        mCharacterPresenter = presenter;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.character_fragment, container, false);
+        View root = inflater.inflate(R.layout.fragment_character, container, false);
 
-        ListView listView = (ListView) root.findViewById(R.id.characterListView);
+        ListView listView = (ListView) root.findViewById(R.id.list_characters);
 
         listView.setAdapter(mCharacterAdapter);
 
-        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refreshLayout);
-
-        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getActivity(), R.color.colorPrimary),
-            ContextCompat.getColor(getActivity(), R.color.colorAccent),
-            ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
-        );
+        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh);
 
         swipeRefreshLayout.setScrollUpChild(listView);
 
@@ -74,7 +60,7 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
 
             @Override
             public void onRefresh() {
-                mPresenter.loadCharacters();
+                mCharacterPresenter.loadCharacters();
             }
         });
 
@@ -87,7 +73,7 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
             return;
         }
 
-        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.refreshLayout);
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_refresh);
 
         refreshLayout.post(new Runnable() {
 
@@ -112,7 +98,7 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
         }
 
         public void replaceData(List<Character> characters) {
-            mCharacters = characters;
+            setList(characters);
 
             notifyDataSetChanged();
         }
@@ -143,12 +129,12 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
             if (rowView == null) {
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-                rowView = inflater.inflate(R.layout.character_item, parent, false);
+                rowView = inflater.inflate(R.layout.item_character, parent, false);
             }
 
             Character character = getItem(position);
 
-            TextView titleTexView = (TextView) rowView.findViewById(R.id.title);
+            TextView titleTexView = (TextView) rowView.findViewById(R.id.text_title);
 
             titleTexView.setText(character.getTitle());
 
