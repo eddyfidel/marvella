@@ -22,5 +22,7 @@ public interface CharacterContract {
         void setLoadingIndicator(boolean active);
 
         void showCharacters(List<Character> characters);
+
+        void showLoadingCharactersError();
     }
 }

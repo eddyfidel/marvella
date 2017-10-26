@@ -15,6 +15,4 @@ public interface MarvelWikiaService {
     @GET("Articles/List")
     Call<Article> getArticle(@Query("expand") int expand, @Query("category") String category,
                              @Query("limit") int limit);
-
-
 }
