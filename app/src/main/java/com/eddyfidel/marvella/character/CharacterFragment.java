@@ -1,17 +1,22 @@
 package com.eddyfidel.marvella.character;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eddyfidel.marvella.R;
 import com.eddyfidel.marvella.data.Character;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +41,7 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCharacterAdapter = new CharacterAdapter(new ArrayList<Character>(0));
+        mCharacterAdapter = new CharacterAdapter(getContext(), new ArrayList<Character>(0));
     }
 
     @Override
@@ -62,6 +67,11 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
 
         ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root
                 .findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
 
         swipeRefreshLayout.setScrollUpChild(listView);
 
@@ -99,11 +109,20 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
         mCharacterAdapter.replaceData(characters);
     }
 
+    @Override
+    public void showLoadingCharactersError() {
+        Toast.makeText(getContext(), R.string.loading_characters_error, Toast.LENGTH_SHORT).show();
+    }
+
     private static class CharacterAdapter extends BaseAdapter {
+
+        private Context mContext;
 
         private List<Character> mCharacters;
 
-        public CharacterAdapter(List<Character> characters) {
+        public CharacterAdapter(Context context, List<Character> characters) {
+            mContext = context;
+
             setList(characters);
         }
 
@@ -146,7 +165,11 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
 
             TextView titleTexView = (TextView) rowView.findViewById(R.id.text_title);
 
+            ImageView thumbnailImageView = (ImageView) rowView.findViewById(R.id.image_thumbnail);
+
             titleTexView.setText(character.getTitle());
+
+            Picasso.with(mContext).load(character.getThumbnail()).into(thumbnailImageView);
 
             return rowView;
         }

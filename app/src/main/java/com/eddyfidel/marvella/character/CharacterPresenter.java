@@ -56,7 +56,11 @@ public class CharacterPresenter implements CharacterContract.Presenter {
 
             @Override
             public void onFailure(Call<Article> call, Throwable t) {
+                if (showLoadingUi) {
+                    mCharacterView.setLoadingIndicator(false);
+                }
 
+                mCharacterView.showLoadingCharactersError();
             }
         });
     }
