@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Marvella</string>
+    <string name="loading_characters_error">Couldn\'t refresh characters</string>
 </resources>
