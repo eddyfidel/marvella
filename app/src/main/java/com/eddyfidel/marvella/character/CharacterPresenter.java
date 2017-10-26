@@ -42,7 +42,8 @@ public class CharacterPresenter implements CharacterContract.Presenter {
             mCharacterView.setLoadingIndicator(true);
         }
 
-        mCharacterRepository.getMarvelWikiaService().getArticle(1, "Personajes", 25).enqueue(new Callback<Article>() {
+        mCharacterRepository.getMarvelWikiaService().getArticle(1, "Personajes", 25)
+                .enqueue(new Callback<Article>() {
 
             @Override
             public void onResponse(Call<Article> call, Response<Article> response) {

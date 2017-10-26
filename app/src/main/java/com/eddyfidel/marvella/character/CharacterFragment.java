@@ -40,19 +40,28 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mCharacterPresenter.loadCharacters();
+    }
+
+    @Override
     public void setPresenter(CharacterContract.Presenter presenter) {
         mCharacterPresenter = presenter;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_character, container, false);
 
         ListView listView = (ListView) root.findViewById(R.id.list_characters);
 
         listView.setAdapter(mCharacterAdapter);
 
-        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh);
+        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root
+                .findViewById(R.id.swipe_refresh);
 
         swipeRefreshLayout.setScrollUpChild(listView);
 
@@ -73,7 +82,8 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
             return;
         }
 
-        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_refresh);
+        final SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) getView()
+                .findViewById(R.id.swipe_refresh);
 
         refreshLayout.post(new Runnable() {
 
