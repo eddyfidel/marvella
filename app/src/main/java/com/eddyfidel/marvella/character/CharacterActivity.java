@@ -18,12 +18,14 @@ public class CharacterActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_character);
 
-        CharacterFragment characterFragment = (CharacterFragment) getSupportFragmentManager().findFragmentById(R.id.frame_content);
+        CharacterFragment characterFragment = (CharacterFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.frame_content);
 
         if (characterFragment == null) {
             characterFragment = CharacterFragment.newInstance();
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), characterFragment, R.id.frame_content);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), characterFragment,
+                    R.id.frame_content);
         }
 
         CharacterRemoteDataSource remoteDataSource = new CharacterRemoteDataSource();
