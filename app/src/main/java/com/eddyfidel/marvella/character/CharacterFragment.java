@@ -21,7 +21,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class CharacterFragment extends Fragment implements CharacterContract.View {
+
+    @BindView(R.id.list_characters) ListView listView;
+
+    @BindView(R.id.swipe_refresh) ScrollChildSwipeRefreshLayout swipeRefreshLayout;
+
+    private Unbinder unbinder;
 
     private CharacterContract.Presenter mCharacterPresenter;
 
@@ -59,14 +69,11 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_character, container, false);
+        View view = inflater.inflate(R.layout.fragment_character, container, false);
 
-        ListView listView = (ListView) root.findViewById(R.id.list_characters);
+        unbinder = ButterKnife.bind(this, view);
 
         listView.setAdapter(mCharacterAdapter);
-
-        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root
-                .findViewById(R.id.swipe_refresh);
 
         swipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
@@ -83,7 +90,14 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
             }
         });
 
-        return root;
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        unbinder.unbind();
     }
 
     @Override
