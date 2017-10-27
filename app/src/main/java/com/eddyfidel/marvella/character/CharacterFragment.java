@@ -59,14 +59,14 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_character, container, false);
+        View view = inflater.inflate(R.layout.fragment_character, container, false);
 
-        ListView listView = (ListView) root.findViewById(R.id.list_characters);
+        ListView listView = (ListView) view.findViewById(R.id.list_characters);
+
+        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) view
+                .findViewById(R.id.swipe_refresh);
 
         listView.setAdapter(mCharacterAdapter);
-
-        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) root
-                .findViewById(R.id.swipe_refresh);
 
         swipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
@@ -83,7 +83,7 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
             }
         });
 
-        return root;
+        return view;
     }
 
     @Override
