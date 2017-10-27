@@ -21,17 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public class CharacterFragment extends Fragment implements CharacterContract.View {
-
-    @BindView(R.id.list_characters) ListView listView;
-
-    @BindView(R.id.swipe_refresh) ScrollChildSwipeRefreshLayout swipeRefreshLayout;
-
-    private Unbinder unbinder;
 
     private CharacterContract.Presenter mCharacterPresenter;
 
@@ -71,7 +61,10 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_character, container, false);
 
-        unbinder = ButterKnife.bind(this, view);
+        ListView listView = (ListView) view.findViewById(R.id.list_characters);
+
+        ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) view
+                .findViewById(R.id.swipe_refresh);
 
         listView.setAdapter(mCharacterAdapter);
 
@@ -91,13 +84,6 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
         });
 
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        unbinder.unbind();
     }
 
     @Override
