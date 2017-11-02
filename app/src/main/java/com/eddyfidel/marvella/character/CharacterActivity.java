@@ -8,6 +8,10 @@ import com.eddyfidel.marvella.data.source.CharacterRepository;
 import com.eddyfidel.marvella.data.source.remote.CharacterRemoteDataSource;
 import com.eddyfidel.marvella.util.ActivityUtils;
 
+/**
+ * Created by eddyfidel on 11/2/17.
+ */
+
 public class CharacterActivity extends AppCompatActivity {
 
     private CharacterPresenter mCharacterPresenter;

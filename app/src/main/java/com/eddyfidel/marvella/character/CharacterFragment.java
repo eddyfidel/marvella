@@ -1,23 +1,18 @@
 package com.eddyfidel.marvella.character;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eddyfidel.marvella.R;
 import com.eddyfidel.marvella.data.Character;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Created by eddyfidel on 11/2/17.
+ */
+
 public class CharacterFragment extends Fragment implements CharacterContract.View {
 
-    @BindView(R.id.list_characters) ListView listView;
+    @BindView(R.id.recycler_characters) RecyclerView recyclerView;
 
     @BindView(R.id.swipe_refresh) ScrollChildSwipeRefreshLayout swipeRefreshLayout;
 
@@ -37,6 +36,8 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     private CharacterContract.Presenter mCharacterPresenter;
 
     private CharacterAdapter mCharacterAdapter;
+
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public CharacterFragment() {
         // Required empty public constructor
@@ -74,14 +75,18 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
 
         unbinder = ButterKnife.bind(this, view);
 
-        listView.setAdapter(mCharacterAdapter);
+        mLayoutManager = new LinearLayoutManager(getContext());
+
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        recyclerView.setAdapter(mCharacterAdapter);
 
         swipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
                 ContextCompat.getColor(getActivity(), R.color.colorAccent),
                 ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
 
-        swipeRefreshLayout.setScrollUpChild(listView);
+        swipeRefreshLayout.setScrollUpChild(recyclerView);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -124,66 +129,5 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     @Override
     public void showLoadingCharactersError() {
         Toast.makeText(getContext(), R.string.loading_characters_error, Toast.LENGTH_SHORT).show();
-    }
-
-    private static class CharacterAdapter extends BaseAdapter {
-
-        private Context mContext;
-
-        private List<Character> mCharacters;
-
-        public CharacterAdapter(Context context, List<Character> characters) {
-            mContext = context;
-
-            setList(characters);
-        }
-
-        public void replaceData(List<Character> characters) {
-            setList(characters);
-
-            notifyDataSetChanged();
-        }
-
-        private void setList(List<Character> characters) {
-            mCharacters = characters;
-        }
-
-        @Override
-        public int getCount() {
-            return mCharacters.size();
-        }
-
-        @Override
-        public Character getItem(int position) {
-            return mCharacters.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View rowView = convertView;
-
-            if (rowView == null) {
-                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-                rowView = inflater.inflate(R.layout.item_character, parent, false);
-            }
-
-            Character character = getItem(position);
-
-            TextView titleTexView = (TextView) rowView.findViewById(R.id.text_title);
-
-            ImageView thumbnailImageView = (ImageView) rowView.findViewById(R.id.image_thumbnail);
-
-            titleTexView.setText(character.getTitle());
-
-            Picasso.with(mContext).load(character.getThumbnail()).into(thumbnailImageView);
-
-            return rowView;
-        }
     }
 }
