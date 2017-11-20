@@ -1,18 +1,16 @@
-package com.eddyfidel.marvella.character;
+package com.eddyfidel.marvella;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
-import com.eddyfidel.marvella.R;
+import com.eddyfidel.marvella.character.CharacterFragment;
+import com.eddyfidel.marvella.character.CharacterPresenter;
 import com.eddyfidel.marvella.data.source.CharacterRepository;
 import com.eddyfidel.marvella.data.source.remote.CharacterRemoteDataSource;
 import com.eddyfidel.marvella.util.ActivityUtils;
 
-/**
- * Created by eddyfidel on 11/2/17.
- */
-
-public class CharacterActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private CharacterPresenter mCharacterPresenter;
 
@@ -20,7 +18,11 @@ public class CharacterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_character);
+        setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
 
         CharacterFragment characterFragment = (CharacterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.frame_content);
@@ -38,4 +40,5 @@ public class CharacterActivity extends AppCompatActivity {
 
         mCharacterPresenter = new CharacterPresenter(repository, characterFragment);
     }
+
 }

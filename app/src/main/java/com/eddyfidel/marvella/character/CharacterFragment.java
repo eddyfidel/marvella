@@ -130,4 +130,5 @@ public class CharacterFragment extends Fragment implements CharacterContract.Vie
     public void showLoadingCharactersError() {
         Toast.makeText(getContext(), R.string.loading_characters_error, Toast.LENGTH_SHORT).show();
     }
+
 }
