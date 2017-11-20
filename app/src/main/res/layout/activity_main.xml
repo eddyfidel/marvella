@@ -64,7 +64,7 @@
                         android:id="@+id/edit_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/what_character_see"
+                        android:text="@string/search_character_message"
                         android:textColor="@color/greySecondary"
                         tools:text="Search" />
 
@@ -85,5 +85,19 @@
         </android.support.v7.widget.CardView>
 
     </FrameLayout>
+
+    <!-- Characters fragment -->
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/frame_filter_bar" />
+
+    <!-- Shadow below toolbar -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/frame_filter_bar"
+        android:background="@drawable/bg_shadow" />
 
 </RelativeLayout>

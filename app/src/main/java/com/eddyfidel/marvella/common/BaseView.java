@@ -7,4 +7,5 @@ package com.eddyfidel.marvella.common;
 public interface BaseView<T> {
 
     void setPresenter(T presenter);
+
 }

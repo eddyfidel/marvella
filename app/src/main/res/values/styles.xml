@@ -13,4 +13,9 @@
 
     <style name="AppTheme.Activity" parent="AppTheme" />
 
+    <style name="AppTheme.Subheader">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

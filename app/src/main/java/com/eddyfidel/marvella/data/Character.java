@@ -38,4 +38,5 @@ public class Character {
     public String getThumbnail() {
         return thumbnail;
     }
+
 }

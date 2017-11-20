@@ -1,7 +1,6 @@
 package com.eddyfidel.marvella.character;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.eddyfidel.marvella.R;
 import com.eddyfidel.marvella.data.Character;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
 
         holder.titleTexView.setText(character.getTitle());
 
-        Picasso.with(mContext).load(character.getThumbnail()).into(holder.thumbnailImageView);
+        Glide.with(mContext).load(character.getThumbnail()).into(holder.thumbnailImageView);
     }
 
     @Override
@@ -75,8 +74,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card_character) CardView characterCardView;
-
         @BindView(R.id.text_title) TextView titleTexView;
 
         @BindView(R.id.image_thumbnail) ImageView thumbnailImageView;
@@ -87,4 +84,5 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
             ButterKnife.bind(this, itemView);
         }
     }
+
 }

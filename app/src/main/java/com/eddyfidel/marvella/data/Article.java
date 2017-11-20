@@ -18,4 +18,5 @@ public class Article {
     public List<Character> getItems() {
         return items;
     }
+
 }

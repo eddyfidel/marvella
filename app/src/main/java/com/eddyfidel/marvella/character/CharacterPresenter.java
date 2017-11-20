@@ -68,4 +68,5 @@ public class CharacterPresenter implements CharacterContract.Presenter {
     private void processCharacters(List<Character> characters) {
         mCharacterView.showCharacters(characters);
     }
+
 }
