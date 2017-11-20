@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0E0E0"
+    tools:context="com.eddyfidel.marvella.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+        app:title="@string/app_name"
+        app:titleMarginStart="24dp"
+        app:titleTextColor="@android:color/white" />
+
+    <FrameLayout
+        android:id="@+id/frame_filter_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_filter_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:elevation="12dp"
+            android:foreground="?attr/selectableItemBackground">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:tint="@color/greySecondary"
+                    app:srcCompat="@drawable/ic_search_white_24dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/image_search"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/edit_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/what_character_see"
+                        android:textColor="@color/greySecondary"
+                        tools:text="Search" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/image_clear_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:tint="@color/greySecondary"
+                    app:srcCompat="@drawable/ic_close_white_24dp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+</RelativeLayout>
