@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CharacterRemoteDataSource {
 
-    private static final String MARVEL_WIKIA_BASE_URL = "http://es.marvel.wikia.com/api/v1/";
+    private static final String MARVEL_WIKIA_BASE_URL = "http://marvel.wikia.com/api/v1/";
 
     public MarvelWikiaService getMarvelWikiaService() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(MARVEL_WIKIA_BASE_URL)

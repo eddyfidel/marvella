@@ -78,7 +78,7 @@
                     android:layout_centerVertical="true"
                     android:padding="8dp"
                     android:tint="@color/greySecondary"
-                    app:srcCompat="@drawable/ic_close_white_24dp" />
+                    app:srcCompat="@drawable/ic_keyboard_voice_white_24dp" />
 
             </RelativeLayout>
 

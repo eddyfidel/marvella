@@ -4,6 +4,7 @@ import com.eddyfidel.marvella.data.Article;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -12,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface MarvelWikiaService {
 
-    @GET("Articles/List")
-    Call<Article> getArticle(@Query("expand") int expand, @Query("category") String category,
-                             @Query("limit") int limit);
+    @GET("Articles/{type}")
+    Call<Article> getArticle(@Path("type") String type, @Query("expand") int expand,
+                             @Query("category") String category, @Query("limit") int limit);
 }
